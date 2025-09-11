@@ -11,39 +11,22 @@ nomes = [
     "Mateus Lira"
 ]
 
-def ordenar_nomes(n_list) :
-    ordered_list = n_list.copy()
-    c = 0
-    inc_name = 0
-    inc_lett = 0
+def compara_nomes(name1, name2) :
+    for cont1, cont2 in zip(name1, name2):
+        if ord(cont1) < ord(cont2) :
+            return True
+        elif ord(cont1) > ord(cont2) :
+            return False
+    return len(name1) <= len(name2)
 
-    while c < 1000:
-        name1 = ordered_list[inc_name]
-        name2 = ordered_list[inc_name+1]
+def ordenar_lista(n_list) :
+    n = len(n_list)
 
-        print("\n",ordered_list)
-        print(name1)
-        print(name2)
+    for inc in range(n):
+        for inc2 in range(0, n - inc - 1) :
+            if not compara_nomes(n_list[inc2], n_list[inc2+1]) :
+                n_list[inc2], n_list[inc2+1] = n_list[inc2+1], n_list[inc2]
 
-        if ord(name1[inc_lett]) != 32 and ord(name2[inc_lett]) == 32:
-            ordered_list.remove(name2)
-            ordered_list.append(name2)
-            inc_lett = 0
-        if ord(name1[inc_lett]) > ord(name2[inc_lett]) :
-            ordered_list.remove(name2)
-            ordered_list.append(name2)
-            inc_lett = 0
-        elif ord(name1[inc_lett]) < ord(name2[inc_lett]) :
-            ordered_list.remove(name1)
-            ordered_list.append(name1)
-            inc_lett = 0
-        elif ord(name1[inc_lett]) == ord(name2[inc_lett]) :
-            inc_lett += 1
-        else: 
-            inc_lett += 1
+    return n_list
 
-        c+=1
-
-
-
-ordenar_nomes(nomes)
+print(ordenar_lista(nomes))
